@@ -1,3 +1,9 @@
+using BLL.ServiceInterfaces;
+using BLL_EF.ServiceImplementations;
+using DAL;
+using BLL_EF.ServiceImplementations;
+using BLL_DB;
+
 namespace WebApi
 {
     public class Program
@@ -7,8 +13,10 @@ namespace WebApi
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
+            
             builder.Services.AddControllers();
+            builder.Services.AddDbContext<WebshopContext>();
+            builder.Services.AddScoped<IProductsBLL, ProductBLL>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -28,6 +36,9 @@ namespace WebApi
             app.MapControllers();
 
             app.Run();
+
+            
+
         }
     }
 }

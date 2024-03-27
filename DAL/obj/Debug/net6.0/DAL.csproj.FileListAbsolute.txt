@@ -15,3 +15,20 @@ C:\Users\student\Desktop\campr\lab2\DAL\obj\Debug\net6.0\refint\DAL.dll
 C:\Users\student\Desktop\campr\lab2\DAL\obj\Debug\net6.0\DAL.pdb
 C:\Users\student\Desktop\campr\lab2\DAL\obj\Debug\net6.0\DAL.genruntimeconfig.cache
 C:\Users\student\Desktop\campr\lab2\DAL\obj\Debug\net6.0\ref\DAL.dll
+C:\Users\Dawid\Desktop\Programowanie bazodanowe\nowe\DAL\bin\Debug\net6.0\DAL.deps.json
+C:\Users\Dawid\Desktop\Programowanie bazodanowe\nowe\DAL\bin\Debug\net6.0\DAL.runtimeconfig.json
+C:\Users\Dawid\Desktop\Programowanie bazodanowe\nowe\DAL\bin\Debug\net6.0\DAL.dll
+C:\Users\Dawid\Desktop\Programowanie bazodanowe\nowe\DAL\bin\Debug\net6.0\DAL.pdb
+C:\Users\Dawid\Desktop\Programowanie bazodanowe\nowe\DAL\bin\Debug\net6.0\Model.dll
+C:\Users\Dawid\Desktop\Programowanie bazodanowe\nowe\DAL\bin\Debug\net6.0\Model.pdb
+C:\Users\Dawid\Desktop\Programowanie bazodanowe\nowe\DAL\obj\Debug\net6.0\DAL.csproj.AssemblyReference.cache
+C:\Users\Dawid\Desktop\Programowanie bazodanowe\nowe\DAL\obj\Debug\net6.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Dawid\Desktop\Programowanie bazodanowe\nowe\DAL\obj\Debug\net6.0\DAL.AssemblyInfoInputs.cache
+C:\Users\Dawid\Desktop\Programowanie bazodanowe\nowe\DAL\obj\Debug\net6.0\DAL.AssemblyInfo.cs
+C:\Users\Dawid\Desktop\Programowanie bazodanowe\nowe\DAL\obj\Debug\net6.0\DAL.csproj.CoreCompileInputs.cache
+C:\Users\Dawid\Desktop\Programowanie bazodanowe\nowe\DAL\obj\Debug\net6.0\DAL.csproj.CopyComplete
+C:\Users\Dawid\Desktop\Programowanie bazodanowe\nowe\DAL\obj\Debug\net6.0\DAL.dll
+C:\Users\Dawid\Desktop\Programowanie bazodanowe\nowe\DAL\obj\Debug\net6.0\refint\DAL.dll
+C:\Users\Dawid\Desktop\Programowanie bazodanowe\nowe\DAL\obj\Debug\net6.0\DAL.pdb
+C:\Users\Dawid\Desktop\Programowanie bazodanowe\nowe\DAL\obj\Debug\net6.0\DAL.genruntimeconfig.cache
+C:\Users\Dawid\Desktop\Programowanie bazodanowe\nowe\DAL\obj\Debug\net6.0\ref\DAL.dll

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi.csproj", "{8DD7FC57-B494-4721-BDA8-4C93AF9108C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi.csproj", "{8DD7FC57-B494-4721-BDA8-4C93AF9108C4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "..\Model\Model.csproj", "{28998588-9E6E-4D2A-B1D7-93FAD541AD54}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL_EF", "..\BLL_EF\BLL_EF.csproj", "{7AA8E2A8-F377-4E15-9954-912E2DCD6A47}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "..\BLL\BLL.csproj", "{6DF2A90F-CB8E-4A4E-AB24-71397E8EAF75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL_DB", "..\BLL_DB\BLL_DB.csproj", "{0122250F-CB83-40F3-AFE9-548AEEBA69FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{6DF2A90F-CB8E-4A4E-AB24-71397E8EAF75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DF2A90F-CB8E-4A4E-AB24-71397E8EAF75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DF2A90F-CB8E-4A4E-AB24-71397E8EAF75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0122250F-CB83-40F3-AFE9-548AEEBA69FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0122250F-CB83-40F3-AFE9-548AEEBA69FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0122250F-CB83-40F3-AFE9-548AEEBA69FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0122250F-CB83-40F3-AFE9-548AEEBA69FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

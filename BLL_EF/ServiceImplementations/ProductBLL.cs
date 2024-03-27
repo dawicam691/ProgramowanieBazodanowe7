@@ -13,7 +13,7 @@ namespace BLL_EF.ServiceImplementations
 {
     public class ProductBLL : IProductsBLL
     {
-        private DAL.WebshopContext context = new WebshopContext();
+        private DAL.WebshopContext context = new DAL.WebshopContext();
 
         public void activate(int id)
         {
@@ -77,6 +77,12 @@ namespace BLL_EF.ServiceImplementations
             List<ProductResponseDTO> response = new List<ProductResponseDTO>();
             foreach (Product product in products)
             {
+                //ProductResponseDTO productResponseDTO = new ProductResponseDTO { Id = product.Id, Name = product.Name, GroupName = groups.Where(x => x.Id == product.GroupId).First().Name, Price = product.Price };
+                int id = product.Id;
+                string name = product.Name;
+                string groupName = groups.Where(x => x.Id == product.GroupId).First().Name;
+                double price = product.Price;
+
                 ProductResponseDTO productResponseDTO = new ProductResponseDTO { Id =  product.Id, Name = product.Name,  GroupName = groups.Where(x=>x.Id == product.GroupId).First().Name, Price = product.Price};
                 response.Add(productResponseDTO );
             }
