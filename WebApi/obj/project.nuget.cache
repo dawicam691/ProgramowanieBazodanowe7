@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NNIO6Z1PpNpaDIDvOvo+GBZQYQpGH2+RWUmx8yglCKZNU36sCnnUkjEytjML5wy1CwnZWJ7UfpzzvhHhyXsD3A==",
+  "dgSpecHash": "8pHbwPr7hZmIh15zV8ZDuBEPqcnj7+qbXyvBrseQOqGrh6R92qkwjASLxbeq/wYuKH3XDlv/Nk+BatdjQX8fTA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Dawid\\Desktop\\Programowanie bazodanowe\\nowe\\WebApi\\WebApi.csproj",
+  "projectFilePath": "C:\\Users\\Dawid\\Desktop\\Programowanie bazodanowe\\program\\ProgramowanieBazodanowe7\\WebApi\\WebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Dawid\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\Dawid\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.7\\microsoft.data.sqlclient.2.1.7.nupkg.sha512",

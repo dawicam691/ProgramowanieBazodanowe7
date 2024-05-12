@@ -17,6 +17,8 @@ namespace WebApi
             builder.Services.AddControllers();
             builder.Services.AddDbContext<WebshopContext>();
             builder.Services.AddScoped<IProductsBLL, ProductBLL>();
+            builder.Services.AddScoped<IOredrBLL, OredrBLL>();
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

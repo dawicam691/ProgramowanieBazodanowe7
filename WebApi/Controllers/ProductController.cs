@@ -1,4 +1,5 @@
-﻿using BLL.DTOModels.Response;
+﻿using BLL.DTOModels.Request;
+using BLL.DTOModels.Response;
 using BLL.ServiceInterfaces;
 using BLL_DB;
 using BLL_EF.ServiceImplementations;
@@ -21,7 +22,7 @@ namespace WebApi.Controllers
         {
             return productsBLL.get();
         }
-        [Route("test")]
+        /*[Route("test")]
         [HttpGet]
         public ProductResponseDTO getOne()
         {
@@ -29,6 +30,21 @@ namespace WebApi.Controllers
             productBLL_DB.get();
 
             return new ProductResponseDTO();
+        }*/
+        [HttpPost]
+        public void addProduct(ProductRequestDTO productRequestDTO)
+        {
+            productsBLL.add(productRequestDTO);
+        }
+        [HttpDelete("{id}")]
+        public void deleteOrDesactivate(int id)
+        {
+            productsBLL.delete(id);
+        }
+        [HttpPut("/activate/{id}")]
+        public void activate(int id)
+        {
+            productsBLL.activate(id);
         }
     }
 }
