@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mItBE/T2fT1O9Wi6aR4W85YoTfRPODAih0k19D5QVSC2wPdo15SWAycDOvHIYN4JbVyzCqtadeyp/Uj2NrqyKQ==",
+  "dgSpecHash": "myZiGjBpDvz2rzE/EWI0UMF2zZtt+1r1+6uGrf7X5lj404y3z5pBVj9PZpX13PMW9kHFLBvoPUdD3gthhkXBRQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Dawid\\Desktop\\Programowanie bazodanowe\\nowe\\BLL_DB\\BLL_DB.csproj",
+  "projectFilePath": "C:\\Users\\Dawid\\Desktop\\Programowanie bazodanowe\\program\\ProgramowanieBazodanowe7\\BLL_DB\\BLL_DB.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Dawid\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\Dawid\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.7\\microsoft.data.sqlclient.2.1.7.nupkg.sha512",

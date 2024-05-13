@@ -1,0 +1,250 @@
+Dodanie produktu:
+
+CREATE PROCEDURE AddNewProduct
+    @Name NVARCHAR(MAX),
+    @Price FLOAT,
+    @GroupId INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO [dbo].[Products] (Name, Price, GroupId, IsActive, Image)
+    VALUES (@Name, @Price, @GroupId, 1, 'noImage');
+END;
+GO
+
+EXEC AddNewProduct @Name = 'New Product', @Price = 99.99, @GroupId = null;
+
+
+usunięcie lub dezaktywacja produktu:
+
+CREATE PROCEDURE DeactivateOrDeleteProduct
+    @ProductId INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    DECLARE @UnpaidOrderExists INT, @OrderExists INT;
+    SELECT @UnpaidOrderExists = COUNT(*)
+    FROM [dbo].[OrderPositions] OP
+    JOIN [dbo].[Orders] O ON OP.OrderId = O.Id
+    WHERE OP.ProductId = @ProductId AND O.isPaid = 0
+    UNION ALL
+    SELECT COUNT(*)
+    FROM [dbo].[BasketPositions]
+    WHERE ProductId = @ProductId;
+    SELECT @OrderExists = COUNT(*)
+    FROM [dbo].[OrderPositions]
+    WHERE ProductId = @ProductId;
+    IF @UnpaidOrderExists > 0
+    BEGIN
+        PRINT 'The product is in use.';
+    END
+    ELSE IF @OrderExists > 0
+    BEGIN
+        UPDATE [dbo].[Products]
+        SET IsActive = 0
+        WHERE Id = @ProductId;
+
+        PRINT 'The product is deactivated.';
+    END
+    ELSE
+    BEGIN
+        DELETE FROM [dbo].[Products]
+        WHERE Id = @ProductId;
+
+        PRINT 'The product is deleted.';
+    END
+END;
+GO
+
+
+EXEC DeactivateOrDeleteProduct @ProductId = 1;
+
+
+aktywacja produktu:
+CREATE PROCEDURE ActivateProduct
+    @ProductId INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    UPDATE [dbo].[Products]
+    SET IsActive = 1
+    WHERE Id = @ProductId;
+
+    PRINT 'The product has been activated.';
+END;
+GO
+
+EXEC ActivateProduct @ProductId = 1;
+
+dodanie produktu do koszyka:
+
+CREATE PROCEDURE AddProductToBasket
+    @ProductId INT,
+    @UserId INT,
+    @Amount INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO [dbo].[BasketPositions] (ProductId, UserId, Amount)
+    VALUES (@ProductId, @UserId, @Amount);
+
+    PRINT 'The product has been added to the basket.';
+END;
+GO
+EXEC AddProductToBasket @ProductId = 1, @UserId = 1, @Amount = 1;
+
+aktualizacja ilości produktów w koszyku:
+
+CREATE PROCEDURE ChangeProductQuantityInBasket
+    @BasketPositionId INT,
+    @NewAmount INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    UPDATE [dbo].[BasketPositions]
+    SET Amount = @NewAmount
+    WHERE Id = @BasketPositionId;
+    PRINT 'The quantity of the product in the basket is updated';
+END;
+GO
+zmiana liczyb produktów w koszyki:
+CREATE PROCEDURE ChangeProductQuantityInBasket
+    @BasketPositionId INT,
+    @NewAmount INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    UPDATE [dbo].[BasketPositions]
+    SET Amount = @NewAmount
+    WHERE Id = @BasketPositionId;
+
+    PRINT 'The quantity of the product in the basket has been updated.';
+END;
+GO
+
+EXEC ChangeProductQuantityInBasket @BasketPositionId = 1, @NewAmount = 2;
+
+usunięcie produktu z koszyka:
+CREATE PROCEDURE RemoveProductFromBasket
+    @BasketPositionId INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DELETE FROM [dbo].[BasketPositions]
+    WHERE Id = @BasketPositionId;
+
+    PRINT 'The product has been removed from the basket';
+END;
+GO
+EXEC RemoveProductFromBasket @BasketPositionId = 1;
+
+generowanie zamoówieniaL
+CREATE PROCEDURE GenerateOrderFromBasket
+    @UserId INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT BP.Id AS BasketPositionId, BP.ProductId, BP.Amount, P.Price
+    FROM [dbo].[BasketPositions] BP
+    JOIN [dbo].[Products] P ON BP.ProductId = P.Id
+    WHERE BP.UserId = @UserId;
+END;
+GO
+EXEC GenerateOrderFromBasket @UserId = 1;
+
+opłacenie zamówienia:
+CREATE PROCEDURE PayForOrder4
+    @OrderId INT,
+    @PaidAmount FLOAT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    DECLARE @TotalPrice FLOAT;
+    SELECT @TotalPrice = SUM(OP.Amount * OP.Price)
+    FROM [dbo].[OrderPositions] OP
+    WHERE OP.OrderId = @OrderId;
+    IF @PaidAmount >= @TotalPrice
+    BEGIN
+        UPDATE [dbo].[Orders]
+        SET isPaid = 1
+        WHERE Id = @OrderId;
+
+        PRINT 'The order has been paid';
+    END
+    ELSE
+    BEGIN
+        PRINT 'The paid amount is not enough.';
+    END
+END;
+GO
+
+EXEC PayForOrder4 @OrderId = 1, @PaidAmount = 6000.00;
+
+lista produktów:
+CREATE PROCEDURE GetProducts7
+    @SortColumn NVARCHAR(50),
+    @SortOrder NVARCHAR(4),
+    @Name NVARCHAR(MAX) = NULL,
+    @GroupName NVARCHAR(MAX) = NULL,
+    @GroupId INT = NULL,
+    @IsActive BIT = 1
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @SQL NVARCHAR(MAX);
+
+    SET @SQL = N'SELECT P.Id, P.Name, P.Price, PG.Name as GroupName
+                  FROM [dbo].[Products] P
+                  LEFT JOIN [dbo].[ProductGroups] PG ON P.GroupId = PG.Id
+                  WHERE (P.Name LIKE ''%'' + ISNULL(@Name, P.Name) + ''%'') 
+                    AND (PG.Name LIKE ''%'' + ISNULL(@GroupName, PG.Name) + ''%'')
+                    AND (P.GroupId = ISNULL(@GroupId, P.GroupId))
+                    AND (P.IsActive = @IsActive)
+                  ORDER BY ' 
+                  + QUOTENAME(@SortColumn) + ' ' 
+                  + CASE WHEN @SortOrder = 'DESC' THEN 'DESC' ELSE 'ASC' END;
+
+    EXEC sp_executesql @SQL, 
+                       N'@Name NVARCHAR(MAX), @GroupName NVARCHAR(MAX), @GroupId INT, @IsActive BIT', 
+                       @Name, @GroupName, @GroupId, @IsActive;
+END;
+GO
+
+inna:
+CREATE PROCEDURE GetProducts4
+    @SortColumn NVARCHAR(50) = 'Name',
+    @SortOrder NVARCHAR(4) = 'ASC',
+    @Name NVARCHAR(MAX) = NULL,
+    @GroupName NVARCHAR(MAX) = NULL,
+    @GroupId INT = NULL,
+    @IsActive BIT = 1
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT P.Id, P.Name, P.Price, PG.Name as GroupName
+    FROM [dbo].[Products] P
+    LEFT JOIN [dbo].[ProductGroups] PG ON P.GroupId = PG.Id
+    WHERE (P.Name LIKE '%' + ISNULL(@Name, P.Name) + '%') 
+      AND (PG.Name LIKE '%' + ISNULL(@GroupName, PG.Name) + '%')
+      AND (P.GroupId = ISNULL(@GroupId, P.GroupId))
+      AND (P.IsActive = @IsActive)
+    ORDER BY 
+        CASE 
+            WHEN @SortColumn = 'Name' AND @SortOrder = 'ASC' THEN P.Name
+            WHEN @SortColumn = 'Price' AND @SortOrder = 'ASC' THEN CAST(P.Price AS NVARCHAR(50))
+            WHEN @SortColumn = 'GroupName' AND @SortOrder = 'ASC' THEN PG.Name
+        END ASC,
+        CASE 
+            WHEN @SortColumn = 'Name' AND @SortOrder = 'DESC' THEN P.Name
+            WHEN @SortColumn = 'Price' AND @SortOrder = 'DESC' THEN CAST(P.Price AS NVARCHAR(50))
+            WHEN @SortColumn = 'GroupName' AND @SortOrder = 'DESC' THEN PG.Name
+        END DESC;
+END;
+GO

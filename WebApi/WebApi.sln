@@ -13,7 +13,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL_EF", "..\BLL_EF\BLL_EF.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "..\BLL\BLL.csproj", "{6DF2A90F-CB8E-4A4E-AB24-71397E8EAF75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL_DB", "..\BLL_DB\BLL_DB.csproj", "{0122250F-CB83-40F3-AFE9-548AEEBA69FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL_DB", "..\BLL_DB\BLL_DB.csproj", "{0122250F-CB83-40F3-AFE9-548AEEBA69FF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docks", "docks", "{4C0ED50C-65F6-4329-849B-380E7999EEF2}"
+	ProjectSection(SolutionItems) = preProject
+		..\docks\Dawid CamprProgramowanie Bazodanowe Sprawozdanie.docx = ..\docks\Dawid CamprProgramowanie Bazodanowe Sprawozdanie.docx
+		..\docks\sql.txt = ..\docks\sql.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

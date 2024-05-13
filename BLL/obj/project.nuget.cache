@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AdiSqj95DdsCTGCaw6lPGM2DLG2C02YWNydeDiZWApqMgUsZYtJelBCWpdHaT4Bt5RKt8TUZsUtEQq43Xnn/KA==",
+  "dgSpecHash": "MHKhjn4hqjGfurp044D5g8jgsbtW680vPj8JtxUlSkyP7kUzamsCLsirJ9JOT3iJX+22Z9k2uukVNdz5xzRyGA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Dawid\\Desktop\\Programowanie bazodanowe\\nowe\\BLL\\BLL.csproj",
+  "projectFilePath": "C:\\Users\\Dawid\\Desktop\\Programowanie bazodanowe\\program\\ProgramowanieBazodanowe7\\BLL\\BLL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Dawid\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Dawid\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

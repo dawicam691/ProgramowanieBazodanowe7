@@ -19,5 +19,10 @@ namespace BLL.ServiceInterfaces
             string sotringContent = null, 
             OrderFilteringDTO orderFilteringDTO = OrderFilteringDTO.PAID_AND_UNPAID,
             string filteringContent = null);
+        public void AddProductToBucket(BasketPositionRequestDTO basketPositionRequestDTO);
+        public void changeAmount(int id, int Amount);
+        public void delete(int id);
+        public List<BasketPositionResponseDTO> getBasketPositions(int userId);
+
     }
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pb2gAVQ2PvpIVwfgzPc6YDt3uDdohAEjuVa5OK2WXzgUbX5zYurq8YMjBWmjBtpQhMeMHgioppaLKOuv7H/CUQ==",
+  "dgSpecHash": "alTl4/Me5/54vqucyvX4rTYPuETzvjGzw762h6KQ8Nwl1kEl/bA9Yq1SxWr+D5Po+8ILljdZAdNutcD8ZOacWA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Dawid\\Desktop\\Programowanie bazodanowe\\nowe\\DAL\\DAL.csproj",
+  "projectFilePath": "C:\\Users\\Dawid\\Desktop\\Programowanie bazodanowe\\program\\ProgramowanieBazodanowe7\\DAL\\DAL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Dawid\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Dawid\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

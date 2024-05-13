@@ -69,10 +69,7 @@ namespace BLL_DB
                     }
                 }
             }
-
-
             return new List<ProductResponseDTO>();
-
         }
     }
 }

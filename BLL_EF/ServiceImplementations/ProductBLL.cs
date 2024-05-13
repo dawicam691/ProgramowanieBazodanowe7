@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace BLL_EF.ServiceImplementations
@@ -33,10 +34,12 @@ namespace BLL_EF.ServiceImplementations
                 if (productRequestDTO.Price < 0)
                     throw new ArgumentException("Cena musi być większa od 0");
                 Product product = new Product();
-                product.Id = context.Products.ToList().Max(x => x.Id) + 1;
+                //product.Id = context.Products.ToList().Max(x => x.Id) + 1;
                 product.Name = productRequestDTO.Name;
                 product.Price = productRequestDTO.Price;
+                product.Image = "brak";
                 product.IsActive = true;
+                //product.GroupId = null;
                 product.GroupId = productRequestDTO.GroupId;
                 context.Products.Add(product);
                 context.SaveChanges();
@@ -49,9 +52,42 @@ namespace BLL_EF.ServiceImplementations
 
         public void delete(int id)
         {
-            context.Products.Remove(context.Products.Where(x => x.Id == id).First());
+            int countOfProductUse = context.OrderPositions.Where(x=>x.ProductId == id).Count();
+            List<OrderPosition> listOfOrderPositionsUsingProduct = context.OrderPositions.Where(x=>x.ProductId == id).ToList();
+            int unpaidCounter = 0;
+            foreach(OrderPosition orderPosition in listOfOrderPositionsUsingProduct)
+            {
+                Order order = context.Orders.Where(x=>x.Id == orderPosition.OrderId).FirstOrDefault();
+                if (order.isPaid == false)
+                {
+                    unpaidCounter++;
+                    break;
+                }
+            }
+            if (countOfProductUse == 0)
+            {
+                Product prosductToDelete = context.Products.Where(x=>x.Id == id).FirstOrDefault();
+                context.Products.Remove(prosductToDelete);
+                context.SaveChanges();
+            }
+            else if(unpaidCounter==0)
+            {
+                Product product = context.Products.Where(x=>x.Id == id).FirstOrDefault();
+                product.IsActive = false;
+                context.Products.Update(product);
+                context.SaveChanges();
+            }
+            //context.Products.Remove(context.Products.Where(x => x.Id == id).First());
         }
-
+        private string getGroupName(int id)
+        {
+            string result = "";
+            ProductGroup productGroup = context.ProductGroups.Where(x => x.Id == id).FirstOrDefault();
+            result = productGroup.Name;
+            if (productGroup.ParentId != null)
+                result = getGroupName((int)productGroup.ParentId) + "/" + productGroup.Name;
+            return result;
+        }
         public List<ProductResponseDTO> get(ProductSortingEntityDTO sortingEntityDTO = ProductSortingEntityDTO.NULL, SortingTypeDTO sortingType = SortingTypeDTO.ASC, ProductFilteringDTO productFilteringDTO = ProductFilteringDTO.NULL, string filterinfContent = null, bool activeOnly = true)
         {
             List<Product> products =  context.Products.ToList();
@@ -80,10 +116,11 @@ namespace BLL_EF.ServiceImplementations
                 //ProductResponseDTO productResponseDTO = new ProductResponseDTO { Id = product.Id, Name = product.Name, GroupName = groups.Where(x => x.Id == product.GroupId).First().Name, Price = product.Price };
                 int id = product.Id;
                 string name = product.Name;
-                string groupName = groups.Where(x => x.Id == product.GroupId).First().Name;
+                string groupName = "";
+                if(product.GroupId!=null)
+                    groupName = getGroupName((int)product.GroupId);
                 double price = product.Price;
-
-                ProductResponseDTO productResponseDTO = new ProductResponseDTO { Id =  product.Id, Name = product.Name,  GroupName = groups.Where(x=>x.Id == product.GroupId).First().Name, Price = product.Price};
+                ProductResponseDTO productResponseDTO = new ProductResponseDTO { Id =  product.Id, Name = product.Name,  GroupName = groupName, Price = product.Price};
                 response.Add(productResponseDTO );
             }
             if(sortingType == SortingTypeDTO.ASC)
@@ -116,5 +153,6 @@ namespace BLL_EF.ServiceImplementations
             context.Products.Update(product);
             context.SaveChanges();
         }
+
     }
 }
